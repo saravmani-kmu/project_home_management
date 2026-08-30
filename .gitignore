@@ -1,12 +1,5 @@
-# OS
+node_modules/
+dist/
+.angular/
+*.env
 .DS_Store
-Thumbs.db
-
-# Editors
-.vscode/*
-!.vscode/extensions.json
-.idea
-
-# Env files at root (if any)
-.env
-.env.local
