@@ -113,30 +113,31 @@ import { TaskFormComponent } from '../task-form/task-form.component';
       align-items: center;
       justify-content: center;
       padding: 64px 24px;
-      color: #9ca3af;
+      color: #444444;
       text-align: center;
       gap: 8px;
     }
-    .empty-icon { color: #d1d5db; margin-bottom: 8px; }
-    .empty-title { font-size: 16px; font-weight: 600; color: #6b7280; }
+    .empty-icon { color: #333333; margin-bottom: 8px; }
+    .empty-title { font-size: 16px; font-weight: 600; color: #666666; }
     .empty-sub { font-size: 14px; }
 
     .task-card {
-      background: #fff;
+      background: #111111;
       border-radius: 12px;
       padding: 16px 16px 16px 20px;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       gap: 12px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-      border: 1px solid #f3f4f6;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+      border: 1px solid #1f1f1f;
       position: relative;
       overflow: hidden;
       transition: box-shadow 0.15s, transform 0.15s;
     }
     .task-card:hover {
-      box-shadow: 0 4px 12px rgba(0,0,0,0.09);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.6);
+      border-color: #2a2a2a;
       transform: translateY(-1px);
     }
 
@@ -146,7 +147,7 @@ import { TaskFormComponent } from '../task-form/task-form.component';
       top: 0;
       bottom: 0;
       width: 4px;
-      background: linear-gradient(180deg, #f59e0b, #fbbf24);
+      background: linear-gradient(180deg, #f5a623, #ffc55a);
       border-radius: 4px 0 0 4px;
     }
 
@@ -174,21 +175,21 @@ import { TaskFormComponent } from '../task-form/task-form.component';
       letter-spacing: 0.02em;
       text-transform: uppercase;
     }
-    .status-backlog { background: #f3f4f6; color: #6b7280; }
-    .status-planned { background: #eff6ff; color: #3b82f6; }
-    .type-office { background: #f5f3ff; color: #7c3aed; }
-    .type-personal { background: #ecfdf5; color: #059669; }
+    .status-backlog { background: #1a1a1a; color: #666666; }
+    .status-planned { background: #0f1e42; color: #4c7cf4; }
+    .type-office { background: #1e1530; color: #7c5cbf; }
+    .type-personal { background: #0a2419; color: #1db88e; }
 
     .task-title {
       font-size: 15px;
       font-weight: 600;
-      color: #1a1a2e;
+      color: #f0f0f0;
       line-height: 1.4;
       word-break: break-word;
     }
     .task-notes {
       font-size: 13px;
-      color: #6b7280;
+      color: #777777;
       line-height: 1.5;
       word-break: break-word;
       overflow: hidden;
@@ -198,7 +199,7 @@ import { TaskFormComponent } from '../task-form/task-form.component';
     }
     .task-date {
       font-size: 11px;
-      color: #9ca3af;
+      color: #444444;
     }
 
     .card-right {
@@ -214,31 +215,31 @@ import { TaskFormComponent } from '../task-form/task-form.component';
       border: none;
       padding: 6px;
       border-radius: 8px;
-      color: #9ca3af;
+      color: #444444;
       cursor: pointer;
       transition: all 0.15s;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .icon-btn:hover { background: #f3f4f6; color: #374151; }
+    .icon-btn:hover { background: #1f1f1f; color: #f0f0f0; }
 
-    .follow-up-btn:hover { background: #fffbeb; color: #f59e0b; }
-    .follow-up-btn.active { color: #f59e0b; }
-    .follow-up-btn.active:hover { background: #fffbeb; }
+    .follow-up-btn:hover { background: #2e1f06; color: #f5a623; }
+    .follow-up-btn.active { color: #f5a623; }
+    .follow-up-btn.active:hover { background: #2e1f06; }
 
     .action-group {
       display: flex;
       gap: 2px;
     }
-    .edit-btn:hover { background: #eff6ff; color: #3b82f6; }
-    .delete-btn:hover { background: #fef2f2; color: #ef4444; }
+    .edit-btn:hover { background: #0f1e42; color: #4c7cf4; }
+    .delete-btn:hover { background: #2a0a0a; color: #e84545; }
 
     /* Confirm Dialog */
     .confirm-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.45);
+      background: rgba(0,0,0,0.75);
       backdrop-filter: blur(4px);
       display: flex;
       align-items: center;
@@ -246,19 +247,20 @@ import { TaskFormComponent } from '../task-form/task-form.component';
       z-index: 1100;
     }
     .confirm-dialog {
-      background: #fff;
+      background: #111111;
+      border: 1px solid #2a2a2a;
       border-radius: 16px;
       padding: 28px 28px 24px;
       max-width: 360px;
       width: 90%;
       text-align: center;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.8);
       animation: slideUp 0.2s ease;
     }
     @keyframes slideUp { from { transform: translateY(20px); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
     .confirm-icon { margin-bottom: 12px; }
-    .confirm-dialog h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
-    .confirm-dialog p { font-size: 14px; color: #6b7280; margin-bottom: 20px; line-height: 1.5; }
+    .confirm-dialog h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; color: #f0f0f0; }
+    .confirm-dialog p { font-size: 14px; color: #777777; margin-bottom: 20px; line-height: 1.5; }
     .confirm-actions { display: flex; gap: 8px; justify-content: center; }
     .btn {
       padding: 9px 20px;
@@ -270,16 +272,16 @@ import { TaskFormComponent } from '../task-form/task-form.component';
     }
     .btn-ghost {
       background: none;
-      border: 1.5px solid #e5e7eb;
-      color: #6b7280;
+      border: 1.5px solid #2a2a2a;
+      color: #777777;
     }
-    .btn-ghost:hover { background: #f3f4f6; }
+    .btn-ghost:hover { background: #1a1a1a; color: #f0f0f0; }
     .btn-danger {
-      background: #ef4444;
-      border: 1.5px solid #ef4444;
+      background: #e84545;
+      border: 1.5px solid #e84545;
       color: #fff;
     }
-    .btn-danger:hover { background: #dc2626; border-color: #dc2626; }
+    .btn-danger:hover { background: #c83030; border-color: #c83030; }
   `]
 })
 export class TaskListComponent {

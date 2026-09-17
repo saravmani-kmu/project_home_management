@@ -115,13 +115,13 @@ import { TaskService } from './services/task.service';
     .app-layout {
       display: flex;
       min-height: 100vh;
-      background: #f8f9fc;
+      background: #000000;
     }
 
     /* Sidebar */
     .sidebar {
       width: 220px;
-      background: #1e1e2e;
+      background: #080808;
       color: #e2e8f0;
       display: flex;
       flex-direction: column;
@@ -129,10 +129,11 @@ import { TaskService } from './services/task.service';
       position: sticky;
       top: 0;
       height: 100vh;
+      border-right: 1px solid #1f1f1f;
     }
     .sidebar-header {
       padding: 20px 16px 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid #1f1f1f;
     }
     .logo {
       display: flex;
@@ -142,7 +143,7 @@ import { TaskService } from './services/task.service';
     .logo-icon {
       width: 36px;
       height: 36px;
-      background: linear-gradient(135deg, #3b82f6, #6366f1);
+      background: linear-gradient(135deg, #4c7cf4, #7c5cbf);
       border-radius: 10px;
       display: flex;
       align-items: center;
@@ -153,7 +154,7 @@ import { TaskService } from './services/task.service';
     .logo-text {
       font-size: 16px;
       font-weight: 700;
-      color: #f1f5f9;
+      color: #f0f0f0;
     }
 
     .sidebar-nav {
@@ -170,7 +171,7 @@ import { TaskService } from './services/task.service';
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: #64748b;
+      color: #444444;
       padding: 0 8px;
       margin-bottom: 4px;
     }
@@ -182,46 +183,46 @@ import { TaskService } from './services/task.service';
       border-radius: 8px;
       transition: background 0.15s;
     }
-    .stat-item:hover { background: rgba(255,255,255,0.05); }
-    .stat-item.highlight { background: rgba(245,158,11,0.08); }
+    .stat-item:hover { background: rgba(255,255,255,0.04); }
+    .stat-item.highlight { background: rgba(245,166,35,0.07); }
     .stat-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
       flex-shrink: 0;
     }
-    .stat-dot.all { background: #94a3b8; }
-    .stat-dot.backlog { background: #6b7280; }
-    .stat-dot.planned { background: #3b82f6; }
-    .stat-dot.office { background: #8b5cf6; }
-    .stat-dot.personal { background: #10b981; }
-    .stat-dot.follow { background: #f59e0b; }
+    .stat-dot.all { background: #555555; }
+    .stat-dot.backlog { background: #444444; }
+    .stat-dot.planned { background: #4c7cf4; }
+    .stat-dot.office { background: #7c5cbf; }
+    .stat-dot.personal { background: #1db88e; }
+    .stat-dot.follow { background: #f5a623; }
     .stat-name {
       flex: 1;
       font-size: 13px;
-      color: #cbd5e1;
+      color: #888888;
       font-weight: 400;
     }
     .stat-count {
       font-size: 12px;
       font-weight: 600;
-      color: #475569;
-      background: rgba(255,255,255,0.06);
+      color: #444444;
+      background: rgba(255,255,255,0.04);
       padding: 1px 7px;
       border-radius: 10px;
     }
-    .stat-count.follow { color: #f59e0b; background: rgba(245,158,11,0.15); }
+    .stat-count.follow { color: #f5a623; background: rgba(245,166,35,0.12); }
 
     .sidebar-footer {
       padding: 12px 16px;
-      border-top: 1px solid rgba(255,255,255,0.06);
+      border-top: 1px solid #1f1f1f;
     }
     .storage-note {
       display: flex;
       align-items: center;
       gap: 6px;
       font-size: 11px;
-      color: #475569;
+      color: #444444;
     }
 
     /* Main content */
@@ -247,12 +248,12 @@ import { TaskService } from './services/task.service';
     .page-title h1 {
       font-size: 26px;
       font-weight: 700;
-      color: #1a1a2e;
+      color: #f0f0f0;
       line-height: 1;
     }
     .task-count {
       font-size: 13px;
-      color: #9ca3af;
+      color: #555555;
       font-weight: 400;
     }
     .add-btn {
@@ -260,26 +261,26 @@ import { TaskService } from './services/task.service';
       align-items: center;
       gap: 7px;
       padding: 9px 18px;
-      background: #3b82f6;
+      background: #4c7cf4;
       color: #fff;
       border: none;
       border-radius: 10px;
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(59,130,246,0.35);
+      box-shadow: 0 2px 12px rgba(76,124,244,0.35);
       transition: all 0.15s;
     }
     .add-btn:hover {
-      background: #2563eb;
-      box-shadow: 0 4px 12px rgba(59,130,246,0.45);
+      background: #3a60d0;
+      box-shadow: 0 4px 16px rgba(76,124,244,0.45);
       transform: translateY(-1px);
     }
     .add-btn:active { transform: translateY(0); }
 
     @media (max-width: 768px) {
       .app-layout { flex-direction: column; }
-      .sidebar { width: 100%; height: auto; position: static; }
+      .sidebar { width: 100%; height: auto; position: static; border-right: none; border-bottom: 1px solid #1f1f1f; }
       .sidebar-nav { flex-direction: row; flex-wrap: wrap; gap: 10px; }
       .nav-section { flex-direction: row; flex-wrap: wrap; gap: 4px; }
       .nav-label { display: none; }

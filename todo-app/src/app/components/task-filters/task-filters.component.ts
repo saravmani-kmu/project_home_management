@@ -112,37 +112,37 @@ import { TaskService } from '../../services/task.service';
     .search-icon {
       position: absolute;
       left: 12px;
-      color: #9ca3af;
+      color: #444444;
       pointer-events: none;
     }
     .search-input {
       width: 100%;
       padding: 10px 12px 10px 38px;
-      border: 1.5px solid #e5e7eb;
+      border: 1.5px solid #2a2a2a;
       border-radius: 10px;
       font-size: 14px;
-      background: #fff;
-      color: #1a1a2e;
+      background: #111111;
+      color: #f0f0f0;
       transition: border-color 0.15s, box-shadow 0.15s;
     }
     .search-input:focus {
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+      border-color: #4c7cf4;
+      box-shadow: 0 0 0 3px rgba(76,124,244,0.12);
     }
-    .search-input::placeholder { color: #9ca3af; }
+    .search-input::placeholder { color: #444444; }
     .clear-search {
       position: absolute;
       right: 10px;
       background: none;
       border: none;
-      color: #9ca3af;
+      color: #555555;
       cursor: pointer;
       padding: 4px;
       border-radius: 4px;
       display: flex;
       transition: color 0.15s, background 0.15s;
     }
-    .clear-search:hover { color: #374151; background: #f3f4f6; }
+    .clear-search:hover { color: #f0f0f0; background: #2a2a2a; }
 
     .filter-chips {
       display: flex;
@@ -154,7 +154,7 @@ import { TaskService } from '../../services/task.service';
     .separator {
       width: 1px;
       height: 20px;
-      background: #e5e7eb;
+      background: #2a2a2a;
     }
     .chip {
       display: inline-flex;
@@ -165,22 +165,22 @@ import { TaskService } from '../../services/task.service';
       font-size: 12px;
       font-weight: 500;
       cursor: pointer;
-      background: #fff;
-      border: 1.5px solid #e5e7eb;
-      color: #6b7280;
+      background: #111111;
+      border: 1.5px solid #2a2a2a;
+      color: #666666;
       transition: all 0.15s;
       white-space: nowrap;
     }
-    .chip:hover { border-color: #d1d5db; background: #f9fafb; color: #374151; }
+    .chip:hover { border-color: #3a3a3a; background: #1a1a1a; color: #f0f0f0; }
     .chip.active { border-color: transparent; }
 
-    .chip.status-backlog.active { background: #f3f4f6; color: #374151; border-color: #d1d5db; }
-    .chip.status-planned.active { background: #eff6ff; color: #2563eb; border-color: #bfdbfe; }
-    .chip.type-office.active { background: #f5f3ff; color: #7c3aed; border-color: #ddd6fe; }
-    .chip.type-personal.active { background: #ecfdf5; color: #059669; border-color: #a7f3d0; }
-    .chip.follow-up-chip.active { background: #fffbeb; color: #b45309; border-color: #fde68a; }
+    .chip.status-backlog.active { background: #1a1a1a; color: #aaaaaa; border-color: #3a3a3a; }
+    .chip.status-planned.active { background: #0f1e42; color: #4c7cf4; border-color: #1e3878; }
+    .chip.type-office.active { background: #1e1530; color: #7c5cbf; border-color: #3a2860; }
+    .chip.type-personal.active { background: #0a2419; color: #1db88e; border-color: #0d4030; }
+    .chip.follow-up-chip.active { background: #2e1f06; color: #f5a623; border-color: #5a3d0a; }
     .chip:not([class*="status-"]):not([class*="type-"]):not(.follow-up-chip).active {
-      background: #f3f4f6; color: #374151; border-color: #d1d5db;
+      background: #1a1a1a; color: #aaaaaa; border-color: #3a3a3a;
     }
   `]
 })

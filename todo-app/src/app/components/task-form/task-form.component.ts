@@ -126,7 +126,7 @@ import { TaskService } from '../../services/task.service';
     .overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.45);
+      background: rgba(0,0,0,0.75);
       backdrop-filter: blur(4px);
       display: flex;
       align-items: center;
@@ -138,11 +138,12 @@ import { TaskService } from '../../services/task.service';
     @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
 
     .modal {
-      background: #fff;
+      background: #111111;
+      border: 1px solid #2a2a2a;
       border-radius: 16px;
       width: 100%;
       max-width: 520px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.8);
       animation: slideUp 0.2s ease;
       overflow: hidden;
     }
@@ -157,19 +158,19 @@ import { TaskService } from '../../services/task.service';
     .modal-header h2 {
       font-size: 18px;
       font-weight: 600;
-      color: #1a1a2e;
+      color: #f0f0f0;
     }
     .close-btn {
       background: none;
       border: none;
-      color: #6b7280;
+      color: #555555;
       cursor: pointer;
       padding: 4px;
       border-radius: 6px;
       display: flex;
       transition: background 0.15s, color 0.15s;
     }
-    .close-btn:hover { background: #f3f4f6; color: #1a1a2e; }
+    .close-btn:hover { background: #1f1f1f; color: #f0f0f0; }
 
     .modal-body {
       padding: 20px 24px;
@@ -191,24 +192,24 @@ import { TaskService } from '../../services/task.service';
     label {
       font-size: 13px;
       font-weight: 500;
-      color: #374151;
+      color: #888888;
     }
-    .required { color: #ef4444; }
+    .required { color: #e84545; }
 
     .input {
-      border: 1.5px solid #e5e7eb;
+      border: 1.5px solid #2a2a2a;
       border-radius: 8px;
       padding: 9px 12px;
       font-size: 14px;
-      color: #1a1a2e;
-      background: #fff;
+      color: #f0f0f0;
+      background: #0a0a0a;
       transition: border-color 0.15s, box-shadow 0.15s;
       width: 100%;
     }
-    .input:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
-    .input.error { border-color: #ef4444; }
+    .input:focus { border-color: #4c7cf4; box-shadow: 0 0 0 3px rgba(76,124,244,0.12); }
+    .input.error { border-color: #e84545; }
     .textarea { resize: vertical; min-height: 80px; }
-    .error-msg { font-size: 12px; color: #ef4444; }
+    .error-msg { font-size: 12px; color: #e84545; }
 
     .toggle-group {
       display: flex;
@@ -220,30 +221,30 @@ import { TaskService } from '../../services/task.service';
       gap: 6px;
       padding: 7px 12px;
       border-radius: 8px;
-      border: 1.5px solid #e5e7eb;
-      background: #fff;
-      color: #6b7280;
+      border: 1.5px solid #2a2a2a;
+      background: #0a0a0a;
+      color: #555555;
       font-size: 13px;
       font-weight: 500;
       cursor: pointer;
       transition: all 0.15s;
       white-space: nowrap;
     }
-    .toggle-btn:hover { border-color: #d1d5db; background: #f9fafb; }
+    .toggle-btn:hover { border-color: #3a3a3a; background: #1a1a1a; color: #f0f0f0; }
     .toggle-btn.active {
-      border-color: #3b82f6;
-      background: #eff6ff;
-      color: #2563eb;
+      border-color: #1e3878;
+      background: #0f1e42;
+      color: #4c7cf4;
     }
     .toggle-btn.type-office.active {
-      border-color: #8b5cf6;
-      background: #f5f3ff;
-      color: #7c3aed;
+      border-color: #3a2860;
+      background: #1e1530;
+      color: #7c5cbf;
     }
     .toggle-btn.type-personal.active {
-      border-color: #10b981;
-      background: #ecfdf5;
-      color: #059669;
+      border-color: #0d4030;
+      background: #0a2419;
+      color: #1db88e;
     }
 
     .checkbox-label {
@@ -255,7 +256,7 @@ import { TaskService } from '../../services/task.service';
     .checkbox {
       width: 16px;
       height: 16px;
-      accent-color: #f59e0b;
+      accent-color: #f5a623;
       cursor: pointer;
     }
     .checkbox-text {
@@ -264,17 +265,17 @@ import { TaskService } from '../../services/task.service';
       gap: 6px;
       font-size: 13px;
       font-weight: 500;
-      color: #374151;
+      color: #888888;
     }
-    .checkbox-text svg { color: #f59e0b; }
+    .checkbox-text svg { color: #f5a623; }
 
     .modal-footer {
       display: flex;
       justify-content: flex-end;
       gap: 8px;
       padding: 16px 24px;
-      border-top: 1px solid #f3f4f6;
-      background: #fafafa;
+      border-top: 1px solid #1f1f1f;
+      background: #0a0a0a;
     }
     .btn {
       padding: 9px 18px;
@@ -286,16 +287,16 @@ import { TaskService } from '../../services/task.service';
     }
     .btn-ghost {
       background: none;
-      border: 1.5px solid #e5e7eb;
-      color: #6b7280;
+      border: 1.5px solid #2a2a2a;
+      color: #666666;
     }
-    .btn-ghost:hover { background: #f3f4f6; color: #374151; }
+    .btn-ghost:hover { background: #1a1a1a; color: #f0f0f0; }
     .btn-primary {
-      background: #3b82f6;
-      border: 1.5px solid #3b82f6;
+      background: #4c7cf4;
+      border: 1.5px solid #4c7cf4;
       color: #fff;
     }
-    .btn-primary:hover { background: #2563eb; border-color: #2563eb; }
+    .btn-primary:hover { background: #3a60d0; border-color: #3a60d0; }
   `]
 })
 export class TaskFormComponent implements OnInit {
