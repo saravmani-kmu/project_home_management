@@ -297,6 +297,27 @@ import { TaskService } from '../../services/task.service';
       color: #fff;
     }
     .btn-primary:hover { background: #3a60d0; border-color: #3a60d0; }
+
+    @media (max-width: 640px) {
+      .overlay { align-items: flex-end; padding: 0; }
+      .modal {
+        border-radius: 20px 20px 0 0;
+        max-width: 100%;
+        max-height: 92vh;
+        animation: sheetUp 0.25s ease;
+      }
+      @keyframes sheetUp { from { transform: translateY(100%) } to { transform: translateY(0) } }
+      .modal-header { padding-top: 24px; position: relative; }
+      .modal-header::before {
+        content: '';
+        position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+        width: 36px; height: 4px; background: #2a2a2a; border-radius: 4px;
+      }
+      .field-row { flex-direction: column; gap: 10px; }
+      .modal-footer { flex-direction: column-reverse; }
+      .modal-footer .btn { width: 100%; text-align: center; justify-content: center; display: flex; }
+      .icon-btn { min-width: 40px; min-height: 40px; }
+    }
   `]
 })
 export class TaskFormComponent implements OnInit {

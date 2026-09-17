@@ -105,6 +105,10 @@ import { TaskFormComponent } from '../task-form/task-form.component';
       display: flex;
       flex-direction: column;
       gap: 10px;
+      padding: 0 32px 100px;
+    }
+    @media (max-width: 640px) {
+      .list-container { padding: 0 16px 96px; }
     }
 
     .empty-state {

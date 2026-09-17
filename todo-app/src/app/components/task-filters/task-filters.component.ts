@@ -32,7 +32,7 @@ import { TaskService } from '../../services/task.service';
         </button>
       </div>
 
-      <div class="filter-chips">
+      <div class="chips-scroll"><div class="filter-chips">
         <div class="chip-group">
           <button
             class="chip"
@@ -94,7 +94,7 @@ import { TaskService } from '../../services/task.service';
           </svg>
           Follow Up
         </button>
-      </div>
+      </div></div>
     </div>
   `,
   styles: [`
@@ -102,6 +102,10 @@ import { TaskService } from '../../services/task.service';
       display: flex;
       flex-direction: column;
       gap: 12px;
+      padding: 0 32px;
+    }
+    @media (max-width: 640px) {
+      .filters-bar { padding: 0 16px; }
     }
 
     .search-wrap {
@@ -144,17 +148,25 @@ import { TaskService } from '../../services/task.service';
     }
     .clear-search:hover { color: #f0f0f0; background: #2a2a2a; }
 
+    .chips-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 2px;
+    }
+    .chips-scroll::-webkit-scrollbar { display: none; }
     .filter-chips {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
       gap: 8px;
+      white-space: nowrap;
     }
-    .chip-group { display: flex; gap: 4px; }
+    .chip-group { display: flex; gap: 4px; flex-shrink: 0; }
     .separator {
       width: 1px;
       height: 20px;
       background: #2a2a2a;
+      flex-shrink: 0;
     }
     .chip {
       display: inline-flex;
