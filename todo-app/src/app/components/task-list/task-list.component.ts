@@ -300,7 +300,7 @@ export class TaskListComponent {
   }
 
   toggleFollowUp(task: Task) {
-    this.taskService.toggleFollowUp(task.id);
+    this.taskService.toggleFollowUp(task.id).catch(() => {});
   }
 
   openEdit(task: Task) {
@@ -326,8 +326,8 @@ export class TaskListComponent {
   doDelete() {
     const task = this.deletingTask();
     if (task) {
-      this.taskService.deleteTask(task.id);
       this.deletingTask.set(null);
+      this.taskService.deleteTask(task.id).catch(() => {});
     }
   }
 }

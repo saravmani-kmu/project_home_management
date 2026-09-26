@@ -1,17 +1,43 @@
 import { Injectable, signal, computed } from '@angular/core';
 import { Task, TaskStatus, TaskType, TaskFilter } from '../models/task.model';
+import { supabase } from '../supabase.client';
 
-const STORAGE_KEY = 'todo_tasks';
+type DbTask = {
+  id: string;
+  title: string;
+  notes: string;
+  status: string;
+  type: string;
+  follow_up: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
+function fromDb(row: DbTask): Task {
+  return {
+    id: row.id,
+    title: row.title,
+    notes: row.notes,
+    status: row.status as TaskStatus,
+    type: row.type as TaskType,
+    followUp: row.follow_up,
+    createdAt: row.created_at,
+    updatedAt: row.updated_at
+  };
+}
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
-  private tasks = signal<Task[]>(this.loadFromStorage());
+  private tasks = signal<Task[]>([]);
   private filter = signal<TaskFilter>({
     status: 'all',
     type: 'all',
     followUp: null,
     search: ''
   });
+
+  readonly loading = signal(true);
+  readonly error = signal<string | null>(null);
 
   readonly filteredTasks = computed(() => {
     const f = this.filter();
@@ -36,6 +62,26 @@ export class TaskService {
     };
   });
 
+  constructor() {
+    this.loadTasks();
+  }
+
+  private async loadTasks() {
+    this.loading.set(true);
+    this.error.set(null);
+    const { data, error } = await supabase
+      .from('tasks')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      this.error.set('Failed to load tasks. Check your connection.');
+    } else {
+      this.tasks.set((data as DbTask[]).map(fromDb));
+    }
+    this.loading.set(false);
+  }
+
   getFilter() {
     return this.filter;
   }
@@ -44,54 +90,66 @@ export class TaskService {
     this.filter.update(f => ({ ...f, ...partial }));
   }
 
-  addTask(data: Omit<Task, 'id' | 'createdAt' | 'updatedAt'>): Task {
-    const now = new Date().toISOString();
-    const task: Task = {
-      ...data,
-      id: crypto.randomUUID(),
-      createdAt: now,
-      updatedAt: now
-    };
-    this.tasks.update(tasks => [task, ...tasks]);
-    this.saveToStorage();
-    return task;
+  async addTask(data: Omit<Task, 'id' | 'createdAt' | 'updatedAt'>): Promise<void> {
+    const { data: row, error } = await supabase
+      .from('tasks')
+      .insert({
+        title: data.title,
+        notes: data.notes,
+        status: data.status,
+        type: data.type,
+        follow_up: data.followUp
+      })
+      .select()
+      .single();
+
+    if (error) {
+      this.error.set('Failed to add task.');
+      return;
+    }
+    this.tasks.update(tasks => [fromDb(row as DbTask), ...tasks]);
   }
 
-  updateTask(id: string, changes: Partial<Omit<Task, 'id' | 'createdAt'>>): void {
+  async updateTask(id: string, changes: Partial<Omit<Task, 'id' | 'createdAt'>>): Promise<void> {
+    const dbChanges: Partial<DbTask> = {};
+    if (changes.title !== undefined) dbChanges.title = changes.title;
+    if (changes.notes !== undefined) dbChanges.notes = changes.notes;
+    if (changes.status !== undefined) dbChanges.status = changes.status;
+    if (changes.type !== undefined) dbChanges.type = changes.type;
+    if (changes.followUp !== undefined) dbChanges.follow_up = changes.followUp;
+    dbChanges.updated_at = new Date().toISOString();
+
+    // Optimistic update
     this.tasks.update(tasks =>
-      tasks.map(t =>
-        t.id === id ? { ...t, ...changes, updatedAt: new Date().toISOString() } : t
-      )
+      tasks.map(t => t.id === id ? { ...t, ...changes, updatedAt: dbChanges.updated_at! } : t)
     );
-    this.saveToStorage();
+
+    const { error } = await supabase.from('tasks').update(dbChanges).eq('id', id);
+    if (error) {
+      this.error.set('Failed to update task.');
+      await this.loadTasks(); // revert on error
+    }
   }
 
-  deleteTask(id: string): void {
+  async deleteTask(id: string): Promise<void> {
+    // Optimistic delete
     this.tasks.update(tasks => tasks.filter(t => t.id !== id));
-    this.saveToStorage();
+
+    const { error } = await supabase.from('tasks').delete().eq('id', id);
+    if (error) {
+      this.error.set('Failed to delete task.');
+      await this.loadTasks(); // revert on error
+    }
   }
 
-  toggleFollowUp(id: string): void {
+  async toggleFollowUp(id: string): Promise<void> {
     const task = this.tasks().find(t => t.id === id);
     if (task) {
-      this.updateTask(id, { followUp: !task.followUp });
+      await this.updateTask(id, { followUp: !task.followUp });
     }
   }
 
-  private loadFromStorage(): Task[] {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : [];
-    } catch {
-      return [];
-    }
-  }
-
-  private saveToStorage(): void {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.tasks()));
-    } catch (e) {
-      console.error('Failed to save tasks', e);
-    }
+  clearError() {
+    this.error.set(null);
   }
 }

@@ -344,7 +344,7 @@ export class TaskFormComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (!this.title.trim()) {
       this.titleError = true;
       return;
@@ -360,9 +360,9 @@ export class TaskFormComponent implements OnInit {
     };
 
     if (this.editTask) {
-      this.taskService.updateTask(this.editTask.id, data);
+      await this.taskService.updateTask(this.editTask.id, data);
     } else {
-      this.taskService.addTask(data);
+      await this.taskService.addTask(data);
     }
 
     this.saved.emit();

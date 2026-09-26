@@ -151,6 +151,20 @@ import { TaskService } from './services/task.service';
       (saved)="showForm.set(false)"
       (cancelled)="showForm.set(false)"
     ></app-task-form>
+
+    <!-- Loading overlay -->
+    <div class="loading-overlay" *ngIf="taskService.loading()">
+      <div class="spinner"></div>
+    </div>
+
+    <!-- Error toast -->
+    <div class="error-toast" *ngIf="taskService.error()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      {{ taskService.error() }}
+      <button class="toast-close" (click)="taskService.clearError()">✕</button>
+    </div>
   `,
   styles: [`
     /* ── Mobile header ── */
@@ -318,6 +332,32 @@ import { TaskService } from './services/task.service';
     .fab:active { transform: scale(0.93); }
 
     /* ── Mobile breakpoint ── */
+    /* Loading & error */
+    .loading-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+      display: flex; align-items: center; justify-content: center; z-index: 2000;
+    }
+    .spinner {
+      width: 36px; height: 36px;
+      border: 3px solid #2a2a2a; border-top-color: #4c7cf4;
+      border-radius: 50%; animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .error-toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: #1a0a0a; border: 1px solid #e84545; color: #e84545;
+      padding: 12px 16px; border-radius: 10px; font-size: 13px; font-weight: 500;
+      display: flex; align-items: center; gap: 8px; z-index: 2000;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6); max-width: 90vw;
+      animation: slideUp 0.2s ease;
+    }
+    .toast-close {
+      background: none; border: none; color: #e84545; cursor: pointer;
+      padding: 0 2px; margin-left: 4px; font-size: 14px; opacity: 0.7;
+    }
+    .toast-close:hover { opacity: 1; }
+
     @media (max-width: 640px) {
       .app-layout { flex-direction: column; min-height: unset; }
 
@@ -343,7 +383,7 @@ import { TaskService } from './services/task.service';
   `]
 })
 export class AppComponent {
-  private taskService = inject(TaskService);
+  readonly taskService = inject(TaskService);
   showForm = signal(false);
   drawerOpen = signal(false);
   readonly stats = this.taskService.stats;
