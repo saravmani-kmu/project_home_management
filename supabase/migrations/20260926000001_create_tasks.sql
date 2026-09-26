@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS tasks (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  title TEXT NOT NULL,
+  notes TEXT NOT NULL DEFAULT '',
+  status TEXT NOT NULL DEFAULT 'backlog',
+  type TEXT NOT NULL DEFAULT 'personal',
+  follow_up BOOLEAN NOT NULL DEFAULT false,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+ALTER TABLE tasks ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "public_all" ON tasks;
+CREATE POLICY "public_all" ON tasks FOR ALL USING (true) WITH CHECK (true);
